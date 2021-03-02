@@ -1,0 +1,29 @@
+FFMPEG to cast the webcam
+- https://gist.github.com/docPhil99/d8667de1e8c5e96e2203f2bc0f28f89d
+- ffmpeg -f avfoundation -framerate 30 -video_size 640x480 -i "0:none" -vcodec libx264 -preset ultrafast -tune zerolatency -pix_fmt yuv422p -f mpegts udp://localhost:12345
+
+Command to recognize
+- python3 yolo_opencv_udp.py --input udp://localhost:12345 --config cfg/yolov3-tiny.cfg --weights yolov3-tiny.weights --classes cfg/yolov3.txt --outputfile udp://localhost:12346
+
+Command to play
+- ffplay udp://localhost:12346
+
+
+CAMERA
+- default IP address 192.168.0.90
+- camera 1: b8:a4:4f:3:71:16
+	- default username : root
+	- default password : 5GNowCam1
+
+- ffplay rtsp://192.168.0.90/axis-media/media.amp
+
+- Comando para procesar el stream de la camara
+	- python3 yolo_opencv_rtsp.py --input rtsp://192.168.0.90/axis-media/media.amp --config cfg/yolov3-tiny.cfg --weights yolov3-tiny.weights --classes cfg/yolov3.txt --outputfile udp://localhost:12346
+
+- modelo tope de gama:
+	python3 yolo_opencv_rtsp.py --input rtsp://192.168.0.90/axis-media/media.amp --config cfg/yolov3-tiny.cfg --weights yolov3-tiny.weights --classes cfg/yolov3.txt --outputfile udp://localhost:12346 --config cfg/yolov3.cfg --weights yolov3.weights
+
+
+
+
+ python3 yolo_opencv_rtsp.py --input rtsp://192.168.0.90/axis-media/media.amp --config cfg/yolov3-tiny.cfg --weights yolov3-tiny.weights --classes cfg/yolov3.txt --outputfile udp://localhost:12346 --confidencelevel 0.2 --fpsthrottle 5
